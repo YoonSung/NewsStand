@@ -1,0 +1,85 @@
+
+
+* {
+	font-family:'NanumGothic';
+}
+
+body {
+	background-image:url(http://static.naver.net/newsstand/img/20121231/bg_bd.png);
+}
+
+li {
+	display:inline-block;
+}
+
+
+
+header > .wrapper{
+	display:block;
+	background-image:url(http://static.naver.net/newsstand/img/20121231/bg_hd.png);
+	background-repeat: repeat-x;
+	position:relative;
+	height:56px;
+}
+
+#header_title {
+	margin-top:10px;
+	display:inline-block;
+}
+
+#header_subtitle {
+	margin-top:10px;
+	display:inline-block;
+	color:#8a8a7f;
+	font-size:12px;
+}
+
+#header_menu1 {
+	display: inline-block;
+	border: 1px solid black;
+	border-radius:5px;
+	position:absolute;
+	top:10px;
+	left:50%;
+	margin-left:-50px;
+}
+
+#header_menu1_my:hover {
+	color:#ff0000
+}
+
+#header_menu1_entire:hover {
+	color:#ff0000
+}
+
+#header_menu2 {
+	margin-top:10px;
+	display:inline-block;
+	float:right;
+}
+
+#header_menu2 li:nth-of-type(2)>a:hover{
+	color:red;
+}
+#header_menu2 li:nth-of-type(3)>a:hover{
+	color:red;
+}
+
+#contents {
+	clear:both;
+	overflow:auto;
+}
+
+#contents_navi {
+	padding:5px;
+	text-align:center;
+	display:block;
+}
+
+#contents_navi a{
+	height:50px;
+}
+
+#contents_navi a:hover{
+	color:red;
+}

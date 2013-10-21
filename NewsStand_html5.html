@@ -1,14 +1,23 @@
 <!DOCTYPE html>
 <html>
-<!--
-  Created using jsbin.com
-  Source can be edited via http://jsbin.com/Anirube/13/edit
--->
 <head>
 <meta charset=utf-8 />
+<link type="text/css" rel="stylesheet" href="reset.css"/>
+<link type="text/css" rel="stylesheet" href="main.css"/>
+<script src="http://www.google.com/jsapi"></script>
+<script>
+ google.load( "webfont", "1" );
+ google.setOnLoadCallback(function() {
+  WebFont.load({ custom: {
+   families: [ "NanumGothic" ],
+   urls: [ "http://fontface.kr/NanumGothic/css" ]
+  }});
+ });
+</script>
+
 <title>NewsStand</title>
 
-<style id="jsbin-css">
+<style id="main.css">
 
 </style>
 </head>
@@ -16,24 +25,26 @@
   
   <!--header area start -->  
   <header>
-    <h4 id="header_title">NEWSSTAND</h4>
-    <p id="header_subtitle">뉴스스탠드 기사는 각 언론사에서 직접 편집합니다</p>
-
-    <menu id="header_menu">
-      <ul>
-        <li><a href="#">MY뉴스</a></li>
-        <li><a href="#">전체언론사</a></li>
-      </ul>
-    </menu>
-    
-    <menu>
-      <ul>
-        <li><a href="#">로그인</a></li>
-        <li><a href="#">새로고침</a></li>
-        <li><a href="#">설정</a></li>
-        <li><a href="#">NAVER</a></li>
-      </ul>
-    </menu>
+  	<div class="wrapper">
+	    <h4 id="header_title">NEWSSTAND</h4>
+	    <p id="header_subtitle">뉴스스탠드 기사는 각 언론사에서 직접 편집합니다</p>
+	
+	    <div id="header_menu1">
+	      <ul>
+	        <li><a id="header_menu1_my" href="#">MY뉴스</a></li>
+	        <li><a id="header_menu1_entire" href="#">전체언론사</a></li>
+	      </ul>
+	    </div>
+	    
+	    <div id="header_menu2">
+	      <ul>
+	        <li><a href="#">로그인</a></li>
+	        <li><a href="#">새로고침</a></li>
+	        <li><a href="#">설정</a></li>
+	        <li><a href="#">NAVER</a></li>
+	      </ul>
+	    </div>
+    </div>
   </header>
   <!--header area end -->
 
@@ -57,68 +68,30 @@
     
     <!-- Contents Article Area (middle)-->    
     <section id="contents_article_frame">
-      
-      <!-- left Article -->
-      <article id="article_frame_left"></article>
-      <a href="#" id="rolling_left_btn"><</a>
-      
-      <!-- center Article -->
-      <article id="article_frame_center">
-        
-        <!-- top -->
-        <header id="article_frame_top">
-          <div>
-            <img class="press_logo" src="http://static.naver.net/newsstand/up/2013/0813/nsd114029379.gif"/>  
-            <a id="subscribe_article" href="#">구독하기</a>
-            <a id="user_proposal" href="#">이용자 한마디</a>
-            <a id="link_metoday" href="#"></a>
-            <a id="link_twitter" href="#"></a>
-            <a id="link_facebook" href="#"></a>
-            <p id="edit_article_time">
-              <span>10-07 09:54</span>
-              <span>편집</span>
-            </p>
-          </div>
-          
-          <a id="article_ad" href="#"><img src="http://adcreative.naver.com/ad3/1004/1004874/420_90_01380877970547.jpg"/></a>
-        </header>
-        
-        <!-- middle -->
-        <article id="article_frame_middle">
-        </article>
-        
-        <!-- bottom -->
-        <footer id="article_frame_bottom">
-          <a id="press_link" href="#">
-            <p>
-              <span>KBS</span>
-              <span>사이트 바로가기</span>
-            </p>
-          </a>
-        </footer>
-        
-      </article>
-      <a href="#" id="rolling_right_btn">></a>
-      
-      <!-- right Article -->
-      <article id="article_frame_right"></art>
+      <div class="wrapper">
+      	<div>
+	      	<article id="article_frame_left"></article>
+	      	<article id="article_frame_center"></article>
+	      	<article id="article_frame_right"></article>
+        </div>
+      </div>
     </section>
     
-    <footer id="contents_control_option">
-      <p id="contents_rolling_option_title">자동넘김</p>
-      <select id="contents_rolling_control">
-        <option id="rolling_control_fast" selected>빠르게(15초)</option>
-        <option id="rolling_control_normal">보통(35초)</option>
-        <option id="rolling_control_slow">느리게(1분)</option>
-        <option id="rolling_control_stop">끄기</option>
+    <footer>
+      <p>자동넘김</p>
+      <select>
+        <option selected>빠르게(15초)</option>
+        <option>보통(35초)</option>
+        <option>느리게(1분)</option>
+        <option>끄기</option>
       </select>
-      <div id="contents_page_control">
+      <div>
         <p>
-          <span id="current_page_num">1</span>
-          <span id="totla_page_num">/</span>
-          <span id="totla_page_num">52</span>
-          <a href="#" id="rolling_left_btn_small"><</a>
-          <a href="#" id="rolling_right_btn_small">></a>
+          <span>1</span>
+          <span>/</span>
+          <span>52</span>
+          <a href="#"><</a>
+          <a href="#">></a>
         </p>
       </div>
       
