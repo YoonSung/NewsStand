@@ -69,30 +69,67 @@
     <!-- Contents Article Area (middle)-->    
     <section id="contents_article_frame">
       <div class="wrapper">
-      	<div>
-	      	<article id="article_frame_left"></article>
-	      	<article id="article_frame_center"></article>
-	      	<article id="article_frame_right"></article>
-        </div>
+      <!-- left Article -->
+      <article class="article_frame" id="article_frame_left"></article>
+      <a href="#" id="rolling_left_btn"><</a>
+      <!-- center Article -->
+      <article class="article_frame" id="article_frame_center">
+      	<div class="wrapper">
+        <!-- top -->
+        <header class="article_frame_top">
+          <div>
+            <img class="press_logo" src="http://static.naver.net/newsstand/up/2013/0813/nsd114029379.gif"/>  
+            <a href="#">구독하기</a>
+            <a href="#">이용자 한마디</a>
+            <a href="#">미투</a>
+            <a href="#">트위터</a>
+            <a href="#">페북</a>
+            <p>
+              <span>10-07 09:54</span>
+              <span>편집</span>
+            </p>
+          </div>
+          
+          <a class="article_ad" href="#"><img src="http://adcreative.naver.com/ad3/1004/1004874/420_90_61381195734140.jpg"/></a>
+        </header>
+        
+        <!-- middle -->
+        <article class="article_frame_middle">
+          <iframe src="http://newsstand.naver.com/include/page/056.html" width="840px" height="380px" frameborder="0" scrolling="no"></iframe>
+        </article>
+        
+        <!-- bottom -->
+        <footer class="article_frame_bottom">
+          <a id="press_link" href="#">
+            <p>
+              <span>KBS</span>
+              <span>사이트 바로가기></span>
+            </p>
+          </a>
+        </footer>
+      	</div>
+      </article>
+      <a href="#" id="rolling_right_btn">></a>
+      
+      <!-- right Article -->
+      <article class="article_frame" id="article_frame_right"></article>
       </div>
     </section>
     
-    <footer>
-      <p>자동넘김</p>
-      <select>
+    <footer id="contents_control_option">
+      <span id="contents_rolling_option_title">자동넘김</span>
+      <select id="contents_rolling_control">
         <option selected>빠르게(15초)</option>
         <option>보통(35초)</option>
         <option>느리게(1분)</option>
         <option>끄기</option>
       </select>
-      <div>
-        <p>
+      <div id="contents_page_control">
           <span>1</span>
           <span>/</span>
           <span>52</span>
           <a href="#"><</a>
           <a href="#">></a>
-        </p>
       </div>
       
       <!-- Contents press navi (bottom) -->    
@@ -114,14 +151,17 @@
   <!--Contents body area end -->  
   
   <!-- footer area start -->
-  <footer>
+  <footer id="footer">
     <p>
       <span>공지사항</span>
-      <span><a href="#">뉴스스탠드 개선 안내</a></span>
-      <span>Copyright ⓒ</span>
-      <span><a href="#">NAVER Corp.</a></span>
-      <span>All Right Reserved</span>
+      <a href="#"><span>뉴스스탠드 개선 안내</span></a>
     </p>
+    <br/>
+  	<p>      
+      <span>Copyright ⓒ</span>
+      <a href="#"><span>NAVER Corp.</span></a>
+      <span>All Right Reserved</span>
+  	</p>
   </footer>
   <!-- footer area end -->  
 <script>

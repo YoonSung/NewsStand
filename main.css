@@ -2,6 +2,7 @@
 
 * {
 	font-family:'NanumGothic';
+	over
 }
 
 body {
@@ -67,7 +68,7 @@ header > .wrapper{
 
 #contents {
 	clear:both;
-	overflow:auto;
+	overflow:hidden;
 }
 
 #contents_navi {
@@ -82,4 +83,119 @@ header > .wrapper{
 
 #contents_navi a:hover{
 	color:red;
+}
+
+#contents_article_frame > .wrapper {
+	width:300%;
+	padding:0 auto;
+}
+
+#rolling_left_btn {
+	float:left;
+	margin-top:280px;
+}
+
+#rolling_right_btn {
+	float:left;
+	margin-top:280px;
+}
+
+.article_frame {
+	position:relative;
+	float:left;
+	display:inline-block;
+	padding:0 20px;
+	background-image:url(http://static.naver.net/newsstand/img/20121231/bg_panel.png);
+	background-repeat:repeat-y;
+	width:900px;
+	height:560px;
+}
+
+#article_frame_left {
+	opacity:0.5;
+	margin-left:-800px;
+}
+
+.article_frame_top {
+	overflow:hidden;
+	margin:15px 30px;
+	border-bottom:3px solid #545454;
+}
+
+.article_frame_top > div {
+	float:left;
+	display:block;
+}
+
+.article_frame_top > div a,p{
+	display:inline-block;
+	font-size:13px;
+}
+
+.press_logo {
+	margin:10px 0;
+	display:block;
+}
+
+.article_ad {
+	float:right;
+	display:inline-block;
+}
+
+.article_frame_middle {
+	display:block;
+	clear:both;
+	margin:0 30px;
+	margin-top: 15px;
+}
+
+.article_frame_bottom {
+	display:block;
+	float:right;
+	clear:both;
+	margin-top:5px;
+	margin-right:30px;
+}
+
+#article_frame_right {
+	opacity:0.5;
+	margin-right:-700px;
+}
+
+#contents_control_option {
+}
+
+#contents_press_navi {
+	margin-top: 60px;
+	display:block;
+	background-image:url(http://static.naver.net/newsstand/img/20121231/bg_nv.png);
+}
+
+#footer {
+	position:relative;
+	height:50px;
+	text-align:center;
+	background-image:url(http://static.naver.net/newsstand/img/20121231/bg_ft.png);
+}
+
+#footer p:nth-of-type(1){
+	position:absolute;
+	color:#ffffff;
+	top:50%;
+	left:50%;
+	margin-left:-100px;
+	margin-top:-13px;
+}
+
+#footer p:nth-of-type(2) {
+	position:absolute;
+	color:#ffffff;
+	top:50%;
+	left:50%;
+	margin-left:-140px;
+	margin-top:8px;	
+}
+
+#footer a {
+	color:#c7c2bc;
 }
