@@ -17,155 +17,176 @@
 
 <title>NewsStand</title>
 
-<style id="main.css">
-
-</style>
 </head>
 <body>
   
-  <!--header area start -->  
+  
+  <h2 class="blind">HEADER영역</h2>
   <header>
   	<div class="wrapper">
-	    <h4 id="header_title">NEWSSTAND</h4>
-	    <p id="header_subtitle">뉴스스탠드 기사는 각 언론사에서 직접 편집합니다</p>
+		 <h4 class="header_title">NEWSSTAND</h4>
+		 <p class="header_subtitle">뉴스스탠드 기사는 각 언론사에서 직접 편집합니다</p>
 	
-	    <div id="header_menu1">
-	      <ul>
-	        <li><a id="header_menu1_my" href="#">MY뉴스</a></li>
-	        <li><a id="header_menu1_entire" href="#">전체언론사</a></li>
-	      </ul>
-	    </div>
-	    
-	    <div id="header_menu2">
-	      <ul>
-	        <li><a href="#">로그인</a></li>
-	        <li><a href="#">새로고침</a></li>
-	        <li><a href="#">설정</a></li>
-	        <li><a href="#">NAVER</a></li>
-	      </ul>
-	    </div>
-    </div>
+		 <div class="header_menu1">
+		   <ul>
+			 <li><a class="header_menu1_my" href="#">MY뉴스</a></li>
+			 <li><a class="header_menu1_entire" href="#">전체언론사</a></li>
+		   </ul>
+		 </div>
+		 
+		 <div class="header_menu2">
+		   <ul>
+			 <li><a href="#" class="btn_login">로그인</a></li>
+			 <li><span>|</span></li>
+			 <li><a href="#" class="btn_refresh">새로고침</a></li>
+ 			 <li><span>|</span></li>
+			 <li><a href="#" class="btn_setting">설정</a></li>
+ 			 <li><span>|</span></li>
+			 <li><a href="http://www.naver.com" class="btn_naver">NAVER</a></li>
+		   </ul>
+		 </div>
+	</div>
   </header>
-  <!--header area end -->
 
+
+  <h2 class="blind">CONTENTS영역</h2>
   <section id="contents">
-  <!--Contents body area start -->
-    
-    <!-- Contents Navi (top)-->
-    <nav id="contents_navi">
-      <ul>
-        <li><a href="#">주요언론사</a></li>
-        <li><a href="#">종합지</a></li>
-        <li><a href="#">방송/통신</a></li>
-        <li><a href="#">경제지</a></li>
-        <li><a href="#">인터넷</a></li>
-        <li><a href="#">IT/영자지</a></li>
-        <li><a href="#">스포츠/연예</a></li>
-        <li><a href="#">매거진/전문지</a></li>
-        <li><a href="#">지역지</a></li>
-      </ul>  
-    </nav>
-    
-    <!-- Contents Article Area (middle)-->    
-    <section id="contents_article_frame">
-      <div class="wrapper">
-      <!-- left Article -->
-      <article class="article_frame" id="article_frame_left"></article>
-      <a href="#" id="rolling_left_btn"><</a>
-      <!-- center Article -->
-      <article class="article_frame" id="article_frame_center">
-      	<div class="wrapper">
-        <!-- top -->
-        <header class="article_frame_top">
-          <div>
-            <img class="press_logo" src="http://static.naver.net/newsstand/up/2013/0813/nsd114029379.gif"/>  
-            <a href="#">구독하기</a>
-            <a href="#">이용자 한마디</a>
-            <a href="#">미투</a>
-            <a href="#">트위터</a>
-            <a href="#">페북</a>
-            <p>
-              <span>10-07 09:54</span>
-              <span>편집</span>
-            </p>
-          </div>
-          
-          <a class="article_ad" href="#"><img src="http://adcreative.naver.com/ad3/1004/1004874/420_90_61381195734140.jpg"/></a>
-        </header>
-        
-        <!-- middle -->
-        <article class="article_frame_middle">
-          <iframe src="http://newsstand.naver.com/include/page/056.html" width="840px" height="380px" frameborder="0" scrolling="no"></iframe>
-        </article>
-        
-        <!-- bottom -->
-        <footer class="article_frame_bottom">
-          <a id="press_link" href="#">
-            <p>
-              <span>KBS</span>
-              <span>사이트 바로가기></span>
-            </p>
-          </a>
-        </footer>
-      	</div>
-      </article>
-      <a href="#" id="rolling_right_btn">></a>
-      
-      <!-- right Article -->
-      <article class="article_frame" id="article_frame_right"></article>
-      </div>
-    </section>
-    
-    <footer id="contents_control_option">
-      <span id="contents_rolling_option_title">자동넘김</span>
-      <select id="contents_rolling_control">
-        <option selected>빠르게(15초)</option>
-        <option>보통(35초)</option>
-        <option>느리게(1분)</option>
-        <option>끄기</option>
-      </select>
-      <div id="contents_page_control">
-          <span>1</span>
-          <span>/</span>
-          <span>52</span>
-          <a href="#"><</a>
-          <a href="#">></a>
-      </div>
-      
-      <!-- Contents press navi (bottom) -->    
-      <section>
-        <nav id="contents_press_navi">
-          <a id="press_rolling_left" href="#"><</a>
-          <ol>
-            <li id="kbs_navi"><a href="#"><img src="http://static.naver.net/newsstand/up/2013/0603/nsd163958474.gif"/></a></li>
-            <li id="kbsworld_navi"><a href="#"><img src="http://static.naver.net/newsstand/up/2012/1125/nsd14465916.gif"/></a></li>
-            <li id="sportdonga_navi"><a href="#"><img src="http://static.naver.net/newsstand/up/2013/0409/nsd16247594.gif"/></a></li>
-            <li id="dailysport_navi"><a href="#"><img src="http://static.naver.net/newsstand/up/2012/1205/nsd113052387.gif"/></a></li>
-            <li id="segye"><a href="#"><img src="http://static.naver.net/newsstand/up/2013/0130/nsd104440320.gif"/></a></li>
-          </ol>
-          <a id="press_rolling_right" href="#">></a>
-        </nav>
-      </section>
-    </footer>
+	
+	<h2 class="blind">CONTENTS NAVI (TOP) </h2>
+	<nav id="contents_navi">
+	  <ul>
+		<li class="cn1"><a href="#">주요언론사</a></li>
+		<li class="cn2"><a href="#">종합/경제</a></li>
+		<li class="cn3"><a href="#">방송/통신</a></li>
+		<li class="cn4"><a href="#">IT</a></li>
+		<li class="cn5"><a href="#">영자지</a></li>
+		<li class="cn6"><a href="#">스포츠/연예</a></li>
+		<li class="cn7"><a href="#">매거진/전문지</a></li>
+		<li class="cn8"><a href="#">지역</a></li>
+	  </ul>	 
+	</nav>
+
+	<h2 class="blind">CONTENTS ARTICLE (MIDDLE) </h2>	 
+	<section id="contents_article_frame">
+		<div class="article_fix_size">
+		 	<div class="wrapper">
+		<!-- left Article -->
+		<article class="article_frame" id="article_frame_left"></article>
+		<a href="#" class="rolling_left_btn"><</a>
+	  
+	  
+		<!-- center Article -->
+		<article class="article_frame" id="article_frame_center">
+	  		<div class="wrapper">
+		   		<!-- top -->
+		   		<header class="article_frame_top">
+						<div>
+					 		<img class="press_logo" src="http://static.naver.net/newsstand/up/2013/0813/nsd114029379.gif"/>	
+							<a href="#">구독하기</a>
+							<a href="#">이용자 한마디</a>
+							<a href="#">미투</a>
+							<a href="#">트위터</a>
+							<a href="#">페북</a>
+							<p>
+							 	<span>10-07 09:54</span>
+							 	<span>편집</span>
+							 </p>
+						</div>
+		  
+					<a class="article_ad" href="#"><img src="http://adcreative.naver.com/ad3/1004/1004874/420_90_61381195734140.jpg"/></a>
+				</header>
+		
+				<!-- middle -->
+					<article class="article_frame_middle">
+						<!-- <iframe src="http://newsstand.naver.com/include/page/056.html" width="840px" height="380px" frameborder="0" scrolling="no"></iframe> -->
+						<h2 class="blind">FOR HOMEWORK AREA</h2>
+						<div id="article_frame_contents">
+							<div class="contents_left">
+								<div class="contents_headline">
+									<ul>
+										<li class="top">
+											<img src="http://static.naver.net/newsstand/2013/1112/KBS/231054/001.jpg"/>
+											<span>12345</span>
+										</li>
+										<li>2</li>
+										<li>3</li>
+										<li>4</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</article>
+		
+				<!-- bottom -->
+				<footer class="article_frame_bottom">
+					<a class="press_link" href="#">
+						<p>
+							 <span>KBS</span>
+							 <span>사이트 바로가기></span>
+						   </p>
+					  </a>
+				  </footer>
+				  
+				  		 </div>
+	  </article>
+	  <a href="#" class="rolling_right_btn">></a>
+	  
+	  
+	  
+	  <!-- right Article -->
+	  <article class="article_frame" id="article_frame_right"></article>
+	  </div>
+	  <div class="article_frame_control">
+			 		<h5>자동넘김</h5>
+			 		<a href="#">속도설정</a>
+	  </div>
+	  <div class="article_frame_pages">
+				  	<div>
+			   			<span>1</span>
+			   			<span>/</span>
+							<span>52</span>
+							<a href="#"><</a>
+							<a href="#">></a>
+					   </div>
+				  </div>
+	  </div>
+	</section>
+	
+	<h2 class="blind">CONTENTS FOOTER (BOTTOM) </h2>	 
+	<footer>    
+	  <section>
+		<nav id="contents_press_navi">
+		
+		  <a class="press_rolling_left" href="#"><</a>
+		  <ol>
+			<li id="kbs_navi"><a href="#"><img src="http://static.naver.net/newsstand/up/2013/0603/nsd163958474.gif"/></a></li>
+			<li id="kbsworld_navi"><a href="#"><img src="http://static.naver.net/newsstand/up/2012/1125/nsd14465916.gif"/></a></li>
+			<li id="sportdonga_navi"><a href="#"><img src="http://static.naver.net/newsstand/up/2013/0409/nsd16247594.gif"/></a></li>
+			<li id="dailysport_navi"><a href="#"><img src="http://static.naver.net/newsstand/up/2012/1205/nsd113052387.gif"/></a></li>
+			<li id="segye"><a href="#"><img src="http://static.naver.net/newsstand/up/2013/0130/nsd104440320.gif"/></a></li>
+		  </ol>
+		  <a class="press_rolling_right" href="#">></a>
+		</nav>
+	  </section>
+	</footer>
   </section>
   <!--Contents body area end -->  
   
   <!-- footer area start -->
   <footer id="footer">
-    <p>
-      <span>공지사항</span>
-      <a href="#"><span>뉴스스탠드 개선 안내</span></a>
-    </p>
-    <br/>
-  	<p>      
-      <span>Copyright ⓒ</span>
-      <a href="#"><span>NAVER Corp.</span></a>
-      <span>All Right Reserved</span>
+	<p>
+	  <span>공지사항</span>
+	  <a href="#"><span>뉴스스탠드 개선 안내</span></a>
+	</p>
+	<br/>
+  	<p>		
+	  <span>Copyright ⓒ</span>
+	  <a href="#"><span>NAVER Corp.</span></a>
+	  <span>All Right Reserved</span>
   	</p>
   </footer>
-  <!-- footer area end -->  
-<script>
-
-</script>
+  <!-- footer area end -->	
+  <script src="main.js"></script>
+<!-- <script src = "news.js"> </script>-->
 </body>
 </html>

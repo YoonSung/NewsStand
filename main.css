@@ -2,7 +2,6 @@
 
 * {
 	font-family:'NanumGothic';
-	over
 }
 
 body {
@@ -13,91 +12,272 @@ li {
 	display:inline-block;
 }
 
-
+.blind {
+	overflow:hidden;
+	width:0;
+	height:0;
+	opacity:0;
+	margin:0;
+	padding:0;
+}
 
 header > .wrapper{
 	display:block;
 	background-image:url(http://static.naver.net/newsstand/img/20121231/bg_hd.png);
 	background-repeat: repeat-x;
 	position:relative;
+	padding-top:5px;
 	height:56px;
 }
 
-#header_title {
-	margin-top:10px;
+.header_title {
 	display:inline-block;
+	background-image:url(http://static.naver.net/newsstand/img/20131014/sp_nwstd.png);
+	background-position-x:2px;
+	background-position-y:-82px;
+	background-repeat:no-repeat;
+	margin-left:15px;
+	overflow:hidden;
+	width:119px;
+	height:30px;
+	line-height:999px;
 }
 
-#header_subtitle {
-	margin-top:10px;
+.header_subtitle {
 	display:inline-block;
+	background:url(http://static.naver.net/newsstand/img/20131014/sp_nwstd.png) -116px -82px no-repeat;
+	width:270px;
+	height:30px;
+	line-height:999px;
+	overflow:hidden;
 	color:#8a8a7f;
 	font-size:12px;
 }
 
-#header_menu1 {
-	display: inline-block;
-	border: 1px solid black;
-	border-radius:5px;
+.header_menu1 {
+	display: block;
 	position:absolute;
-	top:10px;
+	top:5px;
 	left:50%;
-	margin-left:-50px;
+	width:180px;
+	height:30px;
+	margin-left:-90px;
 }
 
-#header_menu1_my:hover {
-	color:#ff0000
-}
-
-#header_menu1_entire:hover {
-	color:#ff0000
-}
-
-#header_menu2 {
-	margin-top:10px;
+.header_menu1 > ul{
 	display:inline-block;
+	height:30px;
 	float:right;
 }
 
-#header_menu2 li:nth-of-type(2)>a:hover{
-	color:red;
-}
-#header_menu2 li:nth-of-type(3)>a:hover{
-	color:red;
-}
-
-#contents {
-	clear:both;
+.header_menu1 > ul * {
+	display:inline-block;
+	float:left;
+	width:87px;
+	height:30px;
+	line-height:999px;
 	overflow:hidden;
 }
 
+.header_menu1_my {
+	background:url(http://static.naver.net/newsstand/img/20131014/sp_nwstd.png) -1px -116px no-repeat;
+}
+
+.header_menu1_my:hover {
+	background:url(http://static.naver.net/newsstand/img/20131014/sp_nwstd.png) -1px -184px no-repeat;
+}
+
+.header_menu1_entire {
+	background:url(http://static.naver.net/newsstand/img/20131014/sp_nwstd.png) -88px -150px no-repeat;
+	margin-left:-5px;
+}
+
+.header_menu2 {
+	display:inline-block;
+	float:right;
+	padding:5px 9px 0 0;
+}
+
+.header_menu2 > ul > li * {
+	display:inline-block;
+	vertical-align:top;
+	line-height:999px;
+	overflow:hidden;
+}
+
+.header_menu2 span {
+	width:2px;
+	height:20px;
+	background:url(http://static.naver.net/newsstand/img/20131014/sp_nwstd.png) -244px -150px no-repeat
+}
+
+.btn_login {
+	width:45px;
+	height:21px;
+	background:url(http://static.naver.net/newsstand/img/20131014/sp_nwstd.png) -187px -174px no-repeat;
+}
+
+.btn_refresh {
+	width:66px;
+	height:21px;
+	background:url(http://static.naver.net/newsstand/img/20131014/sp_nwstd.png) -252px -150px no-repeat;
+}
+
+.btn_refresh:hover {
+	background-position:-252px -61px
+}
+
+.btn_setting {
+	width:46px;
+	height:21px;
+	background:url(http://static.naver.net/newsstand/img/20131014/sp_nwstd.png) -332px -150px no-repeat;
+}
+
+.btn_setting:hover {
+	background-position: -332px -61px;
+}
+
+.btn_naver {
+	width:60px;
+	height:21px;
+	background:url(http://static.naver.net/newsstand/img/20131014/sp_nwstd.png) -536px -272px no-repeat; 
+}
+
 #contents_navi {
-	padding:5px;
 	text-align:center;
 	display:block;
 }
 
 #contents_navi a{
-	height:50px;
+	display: block;
+	overflow:hidden;
+	height:24px;
+	line-height:999px;
+	background:url(http://static.naver.net/newsstand/img/20131014/sp_nwstd.png) no-repeat;
+	vertical-align:top;
 }
 
-#contents_navi a:hover{
-	color:red;
+#contents_navi .cn1 a{
+	width:72px;
+	background-position:-1px -252px;
 }
 
-#contents_article_frame > .wrapper {
-	width:300%;
-	padding:0 auto;
+#contents_navi .cn1 a:hover{
+
 }
 
-#rolling_left_btn {
+#contents_navi .cn2 a{
+	width:68px;
+	background-position:-93px -278px;
+}
+
+#contents_navi .cn2 a:hover{
+	background-position:-182px -278px;
+}
+
+#contents_navi .cn3 a{
+	width:68px;
+	background-position:-93px -304px;
+}
+
+#contents_navi .cn3 a:hover{
+	background-position:-182px -304px;
+}
+
+#contents_navi .cn4 a{
+	width:32px;
+	background-position:-93px -382px;
+}
+
+#contents_navi .cn4 a:hover{
+	background-position:-182px -382px;
+}
+
+#contents_navi .cn5 a{
+	width:52px;
+	background-position:-93px -330px;
+}
+
+#contents_navi .cn5 a:hover{
+	background-position:-182px -330px;
+}
+
+#contents_navi .cn6 a{
+	width:79px;
+	background-position:-93px -408px;
+}
+
+#contents_navi .cn6 a:hover{
+	background-position:-182px -408px
+}
+
+#contents_navi .cn7 a{
+	width:89px;
+	background-position:-93px -434px;
+}
+
+#contents_navi .cn7 a:hover{
+	background-position:-182px -434px;
+}
+
+#contents_navi .cn8 a{
+	width:40px;
+	background-position:-93px -460px;
+}
+
+#contents_navi .cn8 a:hover{
+	background-position:-182px -460px;
+}
+
+#contents {
+	margin-top:-10px;
+	clear:both;
+	overflow:hidden;
+}
+
+.rolling_left_btn {
 	float:left;
-	margin-top:280px;
+	margin-top:230px;
+	margin-right:-25px;
+	min-width:70px;
+	width:59px;
+	height:82px;
+	background:url(http://static.naver.net/newsstand/img/20131014/sp_nwstd.png) 0 0 no-repeat;
+	overflow:hidden;
+	line-height:999px;
 }
 
-#rolling_right_btn {
+.rolling_right_btn {
 	float:left;
-	margin-top:280px;
+	margin-top:230px;
+	margin-left:-25px;
+	min-width:70px;
+	width:59px;
+	height:82px;
+	background:url(http://static.naver.net/newsstand/img/20131014/sp_nwstd.png) -55px 0 no-repeat;
+	overflow:hidden;
+	line-height:999px;
+}
+
+#contents_article_frame {
+	width:100%;
+}
+
+
+.article_fix_size {
+	position:relative;
+	width:50%;
+	margin:0 auto;
+	overflow:visible;
+	min-width:900px;
+	height:560px;
+}
+
+.article_fix_size > .wrapper {
+	position:absolute;
+	width:600%;
+	left:-109%;
+	top:0px;
 }
 
 .article_frame {
@@ -109,12 +289,13 @@ header > .wrapper{
 	background-repeat:repeat-y;
 	width:900px;
 	height:560px;
+	left:0px;
 }
 
 #article_frame_left {
 	opacity:0.5;
-	margin-left:-800px;
 }
+
 
 .article_frame_top {
 	overflow:hidden;
@@ -149,6 +330,60 @@ header > .wrapper{
 	margin-top: 15px;
 }
 
+.contents_left {
+	float:left;
+	width:580px;
+}
+
+.contents_headline {
+	display:block;
+	border:1px solid #dadbdb;
+	height:132px;
+	background-color:#f8f9f9;
+}
+
+.contents_headline *{
+	text-overflow:ellipsis;	
+}
+
+
+#article_frame_contents {
+	position:relative;
+	width:840px;
+	height:380px;
+}
+
+#article_frame_contents .top{
+	font-size:20px; 
+	background: none;
+	margin-top:10px;
+	margin-left:190px;
+}
+
+#article_frame_contents .top > img {
+	width:192px;
+	height:132px;
+	position:absolute;
+	top:0;
+	left:0;
+	display:inline-block;
+}
+
+#article_frame_contents li {
+	font-family:'NanumGothic';
+	font-weight:bold;
+	font-size:15px;
+	line-height:27px;
+	display:block;
+	margin-left:220px;
+	background-image: url(http://static.naver.net/newsstand/2013/1112/KBS/231054/010.png);
+	background-position-x: 0px;
+	background-position-y:12px;
+	background-repeat:no-repeat;
+	padding-left:15px;
+}
+
+
 .article_frame_bottom {
 	display:block;
 	float:right;
@@ -157,25 +392,93 @@ header > .wrapper{
 	margin-right:30px;
 }
 
-#article_frame_right {
-	opacity:0.5;
-	margin-right:-700px;
+.press_link span:nth-of-type(1) {
+	color:#4a7ce4;
+	font-weight:bold;
 }
 
-#contents_control_option {
+
+#article_frame_right {
+	opacity:0.5;
+}
+
+.article_frame_control {
+	position:absolute;
+	bottom:-5px;
+	left:25px;
+	width:200px;
+	height:20px;
+	vertical-align:center;
+}
+
+.article_frame_control * {
+	background:url(http://static.naver.net/newsstand/img/20131014/sp_nwstd.png) no-repeat;
+	overflow:hidden;
+	vertical-align: middle;
+	display:inline-block;
+	line-height:999px;
+}
+
+.article_frame_control > h5 {
+	background-position:-525px -300px;
+	width:42px;
+	height:11px;
+}
+
+.article_frame_control > a {
+	background-position:-435px -455px;
+	width:90px;
+	height:24px;
+}
+
+
+.article_frame_pages {
+	position:absolute;
+	right:0;
+	bottom:-5px;
+	text-align:center;
+}
+
+#contents > footer {
+	clear:both;
 }
 
 #contents_press_navi {
-	margin-top: 60px;
+	margin-top: 15px;
 	display:block;
 	background-image:url(http://static.naver.net/newsstand/img/20121231/bg_nv.png);
+	position:relative;
+	height:120px;
 }
 
+#contents_press_navi > .press_rolling_left {
+	position:absolute;
+	top:40%;
+	left:5px;
+	display:inline-block;
+}
+
+#contents_press_navi > ol{
+	position:absolute;
+	min-width:700px;
+	top:15px;
+	left:20px;
+	display:inline-block;
+	zoom:1;
+}
+
+#contents_press_navi > .press_rolling_right {
+	position:absolute;
+	top:40%;
+	right:5px;
+	display:inline-block;
+}
 #footer {
 	position:relative;
 	height:50px;
 	text-align:center;
 	background-image:url(http://static.naver.net/newsstand/img/20121231/bg_ft.png);
+	background-repeat:repeat-x;
 }
 
 #footer p:nth-of-type(1){
