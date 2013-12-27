@@ -48,7 +48,6 @@
 	</div>
   </header>
 
-
   <h2 class="blind">CONTENTS영역</h2>
   <section id="contents">
 	
@@ -68,29 +67,25 @@
 
 	<h2 class="blind">CONTENTS ARTICLE (MIDDLE) </h2>	 
 	<section id="contents_article_frame">
-		<div class="article_fix_size">
-		 	<div class="wrapper">
-		<!-- left Article -->
-		<article class="article_frame" id="article_frame_left"></article>
-		<a href="#" class="rolling_left_btn"><</a>
-	  
-	  
-		<!-- center Article -->
-		<article class="article_frame" id="article_frame_center">
-	  		<div class="wrapper">
+	
+	<!-- HIDDEN CONTENTS -->
+		<div class="blind" id="hidden_contents">
+		<div class="wrapper">
 		   		<!-- top -->
 		   		<header class="article_frame_top">
 						<div>
 					 		<img class="press_logo" src="http://static.naver.net/newsstand/up/2013/0813/nsd114029379.gif"/>	
-							<a href="#">구독하기</a>
-							<a href="#">이용자 한마디</a>
-							<a href="#">미투</a>
-							<a href="#">트위터</a>
-							<a href="#">페북</a>
-							<p>
-							 	<span>10-07 09:54</span>
-							 	<span>편집</span>
-							 </p>
+							<div class="press_bar">
+								<a href="#">구독하기</a>
+								<a href="#"><span>이용자 한마디</span></a>
+								<a href="#">미투</a>
+								<a href="#">트위터</a>
+								<a href="#">페북</a>
+								<p>
+								 	<span>10-07 09:54</span>
+								 	<span>편집</span>
+								 </p>
+							</div>
 						</div>
 		  
 					<a class="article_ad" href="#"><img src="http://adcreative.naver.com/ad3/1004/1004874/420_90_61381195734140.jpg"/></a>
@@ -98,57 +93,58 @@
 		
 				<!-- middle -->
 					<article class="article_frame_middle">
-						<!-- <iframe src="http://newsstand.naver.com/include/page/056.html" width="840px" height="380px" frameborder="0" scrolling="no"></iframe> -->
-						<h2 class="blind">FOR HOMEWORK AREA</h2>
-						<div id="article_frame_contents">
-							<div class="contents_left">
-								<div class="contents_headline">
-									<ul>
-										<li class="top">
-											<img src="http://static.naver.net/newsstand/2013/1112/KBS/231054/001.jpg"/>
-											<span>12345</span>
-										</li>
-										<li>2</li>
-										<li>3</li>
-										<li>4</li>
-									</ul>
-								</div>
-							</div>
-						</div>
+						<iframe src="http://newsstand.naver.com/include/page/056.html" width="840px" height="380px" frameborder="0" scrolling="no"></iframe>
+						
 					</article>
 		
 				<!-- bottom -->
 				<footer class="article_frame_bottom">
 					<a class="press_link" href="#">
 						<p>
-							 <span>KBS</span>
-							 <span>사이트 바로가기></span>
+							 <strong>KBS</strong> 사이트 바로가기<span></span>
 						   </p>
 					  </a>
 				  </footer>
 				  
 				  		 </div>
-	  </article>
-	  <a href="#" class="rolling_right_btn">></a>
+		</div>
+	<!-- HIDDEN CONTENTS END-->
+	
+		<div class="article_fix_size">
+		 	<div class="wrapper">
+		 	
+		<!-- Article1 -->
+		<article class="article_frame" id="article_frame_1"></article>
+	  
+		<!-- Article2 -->
+		<article class="article_frame" id="article_frame_2"></article>
+		
+		<a href="#" class="rolling_left_btn"><</a>
+		<!-- center Article -->
+		<article class="article_frame" id="article_frame_3"></article>
+		<a href="#" class="rolling_right_btn">></a>
 	  
 	  
 	  
-	  <!-- right Article -->
-	  <article class="article_frame" id="article_frame_right"></article>
+	  <!-- Article4 -->
+	  <article class="article_frame" id="article_frame4"></article>
+	  
+	  <!-- Article5 -->
+	  <article class="article_frame" id="article_frame5"></article>	  
 	  </div>
 	  <div class="article_frame_control">
 			 		<h5>자동넘김</h5>
 			 		<a href="#">속도설정</a>
 	  </div>
-	  <div class="article_frame_pages">
-				  	<div>
-			   			<span>1</span>
-			   			<span>/</span>
-							<span>52</span>
-							<a href="#"><</a>
-							<a href="#">></a>
-					   </div>
-				  </div>
+		  <div class="article_frame_pages">
+		  		<div>
+	   				<span>1</span>
+	   				<span>/</span>
+					<span>52</span>
+					<a class="rolling_left_btn_small" href="#">이전</a>
+					<a class="rolling_right_btn_small" href="#">다음</a>
+			   </div>
+		  </div>
 	  </div>
 	</section>
 	
@@ -157,7 +153,7 @@
 	  <section>
 		<nav id="contents_press_navi">
 		
-		  <a class="press_rolling_left" href="#"><</a>
+		  <a class="press_rolling_left" href="#">left_rolling_btn</a>
 		  <ol>
 			<li id="kbs_navi"><a href="#"><img src="http://static.naver.net/newsstand/up/2013/0603/nsd163958474.gif"/></a></li>
 			<li id="kbsworld_navi"><a href="#"><img src="http://static.naver.net/newsstand/up/2012/1125/nsd14465916.gif"/></a></li>
@@ -165,7 +161,7 @@
 			<li id="dailysport_navi"><a href="#"><img src="http://static.naver.net/newsstand/up/2012/1205/nsd113052387.gif"/></a></li>
 			<li id="segye"><a href="#"><img src="http://static.naver.net/newsstand/up/2013/0130/nsd104440320.gif"/></a></li>
 		  </ol>
-		  <a class="press_rolling_right" href="#">></a>
+		  <a class="press_rolling_right" href="#">right_rolling_btn</a>
 		</nav>
 	  </section>
 	</footer>
@@ -174,19 +170,16 @@
   
   <!-- footer area start -->
   <footer id="footer">
-	<p>
-	  <span>공지사항</span>
-	  <a href="#"><span>뉴스스탠드 개선 안내</span></a>
-	</p>
-	<br/>
-  	<p>		
-	  <span>Copyright ⓒ</span>
-	  <a href="#"><span>NAVER Corp.</span></a>
-	  <span>All Right Reserved</span>
-  	</p>
+	  <div><p>본 콘텐츠의 저작권은 제공처 또는 네이버에 있으며, 이를 무단 이용하는 경우 저작권법 등에 따라 법적책임을 질 수 있습니다.</p></div>
+	  <div>
+		<p>
+		  	<span>Copyright ⓒ</span>
+			<strong><a href="#">NAVER Corp.</a></strong>
+		  	<span>All Right Reserved</span>
+		</p>
+    </div>
   </footer>
   <!-- footer area end -->	
-  <script src="main.js"></script>
-<!-- <script src = "news.js"> </script>-->
+<script src = "main.js"> </script>
 </body>
 </html>
