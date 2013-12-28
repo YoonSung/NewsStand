@@ -11,6 +11,10 @@ function init() {
 	xhrProcess(target.previousElementSibling, press_total_num);
 	xhrProcess(target.previousElementSibling.previousElementSibling, press_total_num-1);
 	
+	//하단부 Navigation Rolling영역 초기화
+	xhrProcessForNavigationItem();
+	
+	
 	//중앙 frame영역에 투명도를 없앤다.
 	target.style.opacity = 1;
 	
@@ -254,6 +258,60 @@ function xhrProcess( frame, int_page_num ) {
 	
 	return press_total_num;
 }
+
+function xhrProcessForNavigationItem() {
+
+	var containerFrame = document.querySelector("#contents_press_navi ol");
+	console.log(containerFrame);
+
+
+	var templateString = "<li id='<%=pressIndex%>'><a href='#'><img src='<%=paperImgURL%>'/></a></li>";
+	var url = "./pressData.json";
+	var request = new XMLHttpRequest();
+	
+	request.open("GET", url, false);
+	request.onreadystatechange=function() {
+		if ( request.readyState === 4 && request.status === 200 ) {
+			var result = request.responseText;
+			var responseArray = JSON.parse(result);
+			console.log(responseArray);
+			var index = 0;
+			var targetObject;
+			
+			var _paperImgURL;
+			var press_total_num = responseArray.length;
+			
+			var compiled;
+			var obj;
+			
+			while (index < press_total_num) {
+				var tempTemplateString = templateString;
+				
+				targetObject = responseArray[index];
+				//console.log(targetObject);
+				
+				
+				_paperImgURL = targetObject.paperURL;
+				console.log(_paperImgURL);
+				
+				compiled = _.template(tempTemplateString);		
+				result = compiled( {pressIndex:index, paperImgURL:_paperImgURL} );
+				
+				containerFrame.insertAdjacentHTML('beforeend', result);
+				
+				++index;
+			}
+			
+			
+
+			
+		}
+	}
+	
+	request.send(null);
+
+}
+
 
 function removeScriptTagFromString( value ) {
 	
