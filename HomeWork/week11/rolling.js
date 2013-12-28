@@ -49,7 +49,7 @@ function moveLeft(interval, element) {
 	}	
 
 	// ul태그가 오른쪽, 혹은 왼쪽으로 li한칸만큼 이동했을 경우 ( ==500일 경우이다 )
-	if ( interval.direction * style_left >= 500) {
+	if ( interval.direction * style_left >= 940) {
 	
 		//방향을 확인한 후
 		if ( interval.direction === -1 )
@@ -59,14 +59,14 @@ function moveLeft(interval, element) {
 			element.insertBefore(element.children[3] , element.children[0]);
 		
 		//순식간에 ul태그 전체를 li엘리먼트가 이동한 반대편쪽으로 500만큼 이동시킨다. (그럼 view상에서는 변화없이 ul태그의 위치와 순서를 바꿀 수 있다)
-		element.style.left = style_left + (interval.direction * -500)+"px";
+		element.style.left = style_left + (interval.direction * -940)+"px";
 		
 		//애니메이션 종료 및 함수 탈출
 		clearInterval(interval.id);
 		return;
-	}
-		
-	element.style.left = style_left + (interval.direction * 10) +"px";
+	}	
+	element.style.left = style_left + (interval.direction * 18) +"px";
+	console.log(element.style.left);
 	interval.count++;
 }
 
