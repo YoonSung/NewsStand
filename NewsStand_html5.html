@@ -14,7 +14,7 @@
   }});
  });
 </script>
-
+<script src="underscore.js"></script>  
 <title>NewsStand</title>
 
 </head>
@@ -69,12 +69,16 @@
 	<section id="contents_article_frame">
 	
 	<!-- HIDDEN CONTENTS -->
+		
 		<div class="blind" id="hidden_contents">
+		<script type="text/template" class="template">
 		<div class="wrapper">
 		   		<!-- top -->
 		   		<header class="article_frame_top">
 						<div>
-					 		<img class="press_logo" src="http://static.naver.net/newsstand/up/2013/0813/nsd114029379.gif"/>	
+							<% if (logoURL) { %>
+					 			<img class="press_logo" src="<%=logoURL%>"/>	
+					 		<%}%>
 							<div class="press_bar">
 								<a href="#">구독하기</a>
 								<a href="#"><span>이용자 한마디</span></a>
@@ -87,27 +91,32 @@
 								 </p>
 							</div>
 						</div>
-		  
-					<a class="article_ad" href="#"><img src="http://adcreative.naver.com/ad3/1004/1004874/420_90_61381195734140.jpg"/></a>
+					<a class="article_ad" href="#"><img src="#"/></a>
 				</header>
 		
 				<!-- middle -->
 					<article class="article_frame_middle">
-						<iframe src="http://newsstand.naver.com/include/page/056.html" width="840px" height="380px" frameborder="0" scrolling="no"></iframe>
-						
+						<% if (iframeURL) { %>
+						<iframe src="<%=iframeURL%>" width="840px" height="380px" frameborder="0" scrolling="no"></iframe>
+						<%}%>						
 					</article>
 		
 				<!-- bottom -->
 				<footer class="article_frame_bottom">
 					<a class="press_link" href="#">
 						<p>
-							 <strong>KBS</strong> 사이트 바로가기<span></span>
+							<% if (pressName) { %>
+							 <strong><%=pressName%></strong> 사이트 바로가기<span></span>
+	 						<%}%>	
 						   </p>
 					  </a>
 				  </footer>
 				  
 				  		 </div>
+				  </script>
 		</div>
+		
+		
 	<!-- HIDDEN CONTENTS END-->
 	
 		<div class="article_fix_size">
