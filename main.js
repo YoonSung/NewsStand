@@ -5,11 +5,11 @@ function init() {
 	
 	//5개의 frame영역에 데이터를 로드한다.
 	var target = document.getElementById("article_frame_3");
-	var press_total_num = xhrProcess(target, 0);
-	xhrProcess(target.nextElementSibling, 1);
-	xhrProcess(target.nextElementSibling.nextElementSibling, 2);
-	xhrProcess(target.previousElementSibling, press_total_num-1);
-	xhrProcess(target.previousElementSibling.previousElementSibling, press_total_num-2);
+	var press_total_num = xhrProcess(target, 1);
+	xhrProcess(target.nextElementSibling, 2);
+	xhrProcess(target.nextElementSibling.nextElementSibling, 3);
+	xhrProcess(target.previousElementSibling, press_total_num);
+	xhrProcess(target.previousElementSibling.previousElementSibling, press_total_num-1);
 	
 	//총 json파일에서 읽은 등록된 press갯수를 중앙프레임 하단에 표기한다.
 	var number_frame = document.querySelector(".article_frame_pages > div");
@@ -55,10 +55,40 @@ function scrollFrame(tagClassName, frames) {
 
 }
 
+function getCurrentPageNum() {
+	var number_frame = document.querySelector(".article_frame_pages > div");
+	return ( parseInt(number_frame.querySelector("span:nth-of-type(1)").innerHTML) );
+}
+
+function getNextPageNum( direction, current_page ) {
+	var current_page = current_page;
+	var last_page = getLastPageNum();
+	var next_page;
+	
+	if ( direction === 1 ) {
+		if ( current_page === 1 )
+			next_page = last_page;
+		else
+			next_page = current_page-1;
+	} else {
+		if ( current_page === last_page )
+			next_page = 1;
+		else
+			next_page = current_page+1;
+	}
+	
+	return next_page;
+}
+
+function getLastPageNum() {
+	var number_frame = document.querySelector(".article_frame_pages > div");
+	return ( parseInt(number_frame.querySelector("span:nth-of-type(3)").innerHTML) );
+}
+
 function changeExtraComponentBeforeRolling(interval) {
 	//중앙 프레임 하단의 숫자변경 (옮기는 페이지로)
 	var number_frame = document.querySelector(".article_frame_pages > div");
-	var previousNum = parseInt(number_frame.querySelector("span:nth-of-type(1)").innerHTML);
+	var previousNum =  getCurrentPageNum();
 	var lastNum = parseInt(number_frame.querySelector("span:nth-of-type(3)").innerHTML);
 		
 	if ( interval.direction === -1 ) {
@@ -95,6 +125,18 @@ function changeExtraComponentAfterRolling( style_left, interval, frames ) {
 		
 	//순식간에 ul태그 전체를 li엘리먼트가 이동한 반대편쪽으로 500만큼 이동시킨다. (그럼 view상에서는 변화없이 ul태그의 위치와 순서를 바꿀 수 있다)
 	frames.style.left = style_left + (interval.direction * -1000)+"px";
+	
+	
+	//옮겨진 엘리먼트의 데이터를 새로 업데이트 시킨다.
+	var next_page = getNextPageNum(interval.direction, getNextPageNum(interval.direction, getCurrentPageNum()));
+	
+	console.log("next page ");
+	console.log(next_page);
+	console.log("direction");
+	console.log(interval.direction);
+	
+	
+	xhrProcess( moveFrame,  next_page );
 }
 
 
@@ -153,7 +195,8 @@ function getStyle(node, style) {
 	return window.getComputedStyle(node, null).getPropertyValue(style);
 }
 
-function xhrProcess( frame, int_press_num ) {
+//int_page_num is not a index, it is a number that is under the center frame page num.
+function xhrProcess( frame, int_page_num ) {
 
 	var templateTag = document.getElementById("hidden_contents");
 	//var target = document.getElementById("article_frame_3");
@@ -179,7 +222,7 @@ function xhrProcess( frame, int_press_num ) {
 			press_total_num = responseObject.length;
 			
 			
-			responseObject = responseObject[int_press_num];
+			responseObject = responseObject[int_page_num-1];
 			console.log(responseObject);
 			_logoURL = responseObject.logoURL;
 			_iframeURL = responseObject.iframeURL;
