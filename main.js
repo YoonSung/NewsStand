@@ -5,30 +5,24 @@ function init() {
 }
 
 function registerEvents() {
-	//var rollLeft = document.querySelector(".rolling_left_btn");
-	//var rollRight = document.querySelector(".rolling_right_btn");
-	
-	//rollLeft.addEventListener('click', xhrProcess, false);
-	
 	
 	var frames = document.querySelector(".article_fix_size .wrapper");
 	console.log(frames);
 	
-	document.querySelector(".rolling_left_btn").addEventListener('click', function(e) { scrollFrame(e.target.className, frames)}, false);
-	document.querySelector(".rolling_right_btn").addEventListener('click', function(e) { scrollFrame(e.target.className, frames)}, false);
+	document.querySelector(".article_fix_size").addEventListener('click', function(e) { scrollFrame(e.target.className, frames)}, false);
 }
 
 
-function scrollFrame(tagId, frames) {
+function scrollFrame(tagClassName, frames) {
 
 	//global variable이 아닌 객체로 변수값들을 관리한다.
 	var interval = new Object();
 	interval.direction = null;
 	
-	if ( tagId === "rolling_left_btn" ) {
+	if ( tagClassName === "rolling_left_btn" ) {
 		//방향에 따라서 direction 상수값을 바꿔준다
 		interval.direction = -1;
-	} else if ( tagId === "rolling_right_btn" ) {
+	} else if ( tagClassName === "rolling_right_btn" ) {
 		interval.direction = 1;
 	} else {
 		return;
@@ -38,24 +32,11 @@ function scrollFrame(tagId, frames) {
 	interval.count = 0;
 	interval.max = 50;
 	interval.boundary = Math.abs(parseInt(getStyle(frames, 'left'))) + 1000;
-	
-	console.log("interval. boundary");
-	console.log(interval.boundary);
-		
-	
-	/*
-var test = document.querySelector(".article_fix_size .wrapper");
-	var style_left = parseInt(getStyle(frames, 'left'));
-	console.log(style_left);
-	
-	frames.style.left = (style_left + (1000*interval.direction)) + "px";
-*/
-	
-interval.id = setInterval(
+	interval.id = setInterval(
 		function() {
 			//전역변수를 쓸 필요 없이 함수로 전달할 수 있는 방법!!!! 최고!!!
 			( animationMove ) ( interval, frames );	
-		}, 2);
+	}, 2);
 
 }
 
@@ -85,8 +66,6 @@ function animationMove( interval, frames ) {
 }
 
 
-
-
 //Cross Domain
 function loadAdUrlFromXHR() {
 	var head = document.getElementsByTagName("body")[0];
@@ -110,8 +89,6 @@ function YoonsungRequest( ad_url_from_server ) {
 	target.src = ad_url_from_server;
 	console.log(target);
 }
-
-
 
 
 
@@ -141,17 +118,12 @@ function xhrProcess() {
 	
 	var compiled = _.template(templateString);	
 	var result = compiled( {logoURL:_logoURL, iframeURL:_iframeURL, pressName:_pressName} );
-	result = removeScriptState(result);	
-
-	
-	
-	console.log(result);
-	
+	result = removeScriptTagFromString(result);		
 
 	target.innerHTML = result;
 }
 
-function removeScriptState( value ) {
+function removeScriptTagFromString( value ) {
 	
 	while ( value.indexOf("<script") != -1 && value.indexOf("</script")) {
 		var startIndex = value.indexOf("<script");
