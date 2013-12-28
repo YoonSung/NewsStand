@@ -1,85 +1,71 @@
-{
-	1:
+[
 		{
 			"press"		: "MBC",
 			"logoURL"	: "http://static.naver.net/newsstand/up/2013/0813/nsd114044142.gif",
-			"iframeURL"	: "http://newsstand.naver.com/include/page/214.html",
+			"iframeURL"	: "http://newsstand.naver.com/include/page/214.html"
 			
 		},
 		
-	2:
 		{
 			"press"		: "KBS",
 			"logoURL"	: "http://static.naver.net/newsstand/up/2013/0813/nsd114029379.gif",
-			"iframeURL"	: "http://newsstand.naver.com/include/page/056.html",
+			"iframeURL"	: "http://newsstand.naver.com/include/page/056.html"
 			
 		},	
 		
-	3:
 		{
 			"press"		: "노컷뉴스",
 			"logoURL"	: "http://static.naver.net/newsstand/up/2013/0813/nsd114441839.gif",
-			"iframeURL"	: "http://newsstand.naver.com/include/page/079.html",
+			"iframeURL"	: "http://newsstand.naver.com/include/page/079.html"
 			
 		},	
 		
-	4:
 		{
 			"press"		: "한국일보",
 			"logoURL"	: "http://static.naver.net/newsstand/up/2013/0813/nsd113759208.gif",
-			"iframeURL"	: "http://newsstand.naver.com/include/page/038.html",
+			"iframeURL"	: "http://newsstand.naver.com/include/page/038.html"
 			
 		},	
 		
-	5:
 		{
 			"press"		: "블로터닷넷",
 			"logoURL"	: "http://static.naver.net/newsstand/up/2013/0813/nsd114723490.gif",
-			"iframeURL"	: "http://newsstand.naver.com/include/page/293.html",
+			"iframeURL"	: "http://newsstand.naver.com/include/page/293.html"
 			
 		},	
 		
-	6:
 		{
 			"press"		: "조선일보",
 			"logoURL"	: "http://static.naver.net/newsstand/up/2013/0813/nsd113710494.gif",
-			"iframeURL"	: "http://newsstand.naver.com/include/page/023.html",
+			"iframeURL"	: "http://newsstand.naver.com/include/page/023.html"
 			
 		},	
 		
-		
-	7:
 		{
 			"press"		: "코리아타임즈",
 			"logoURL"	: "http://static.naver.net/newsstand/up/2013/0813/nsd114914440.gif",
-			"iframeURL"	: "http://newsstand.naver.com/include/page/044.html",
+			"iframeURL"	: "http://newsstand.naver.com/include/page/044.html"
 			
 		},	
 		
-		
-	8:
 		{
 			"press"		: "지지통신",
 			"logoURL"	: "http://static.naver.net/newsstand/up/2013/0813/nsd113913801.gif",
-			"iframeURL"	: "http://newsstand.naver.com/include/page/376.html",
+			"iframeURL"	: "http://newsstand.naver.com/include/page/376.html"
 			
 		},	
 		
-		
-	9:
 		{
 			"press"		: "동아일보",
 			"logoURL"	: "http://static.naver.net/newsstand/up/2013/0813/nsd111048277.gif",
-			"iframeURL"	: "http://newsstand.naver.com/include/page/020.html",
+			"iframeURL"	: "http://newsstand.naver.com/include/page/020.html"
 			
 		},
 		
-		
-	10:
 		{
 			"press"		: "스포츠동아",
 			"logoURL"	: "http://static.naver.net/newsstand/up/2013/0813/nsd114516931.gif",
-			"iframeURL"	: "http://newsstand.naver.com/include/page/314.html",
+			"iframeURL"	: "http://newsstand.naver.com/include/page/314.html"
 			
-		},																				
-}
+		}
+]

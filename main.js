@@ -1,20 +1,32 @@
 
 function init() {
 	registerEvents();	
-	xhrProcess();
+	
+	
+	//5개의 frame영역에 데이터를 로드한다.
+	var target = document.getElementById("article_frame_3");
+	var press_total_num = xhrProcess(target, 0);
+	xhrProcess(target.nextElementSibling, 1);
+	xhrProcess(target.nextElementSibling.nextElementSibling, 2);
+	xhrProcess(target.previousElementSibling, press_total_num-1);
+	xhrProcess(target.previousElementSibling.previousElementSibling, press_total_num-2);
+	
+	//총 json파일에서 읽은 등록된 press갯수를 중앙프레임 하단에 표기한다.
+	var number_frame = document.querySelector(".article_frame_pages > div");
+	number_frame.querySelector("span:nth-of-type(1)").innerHTML = 1;
+	number_frame.querySelector("span:nth-of-type(3)").innerHTML = press_total_num;
+	
+	refreshBannerFromServer();
 }
 
 function registerEvents() {
-	
 	var frames = document.querySelector(".article_fix_size .wrapper");
-	console.log(frames);
-	
-	document.querySelector(".article_fix_size").addEventListener('click', function(e) { scrollFrame(e.target.className, frames)}, false);
+	document.querySelector(".article_fix_size").addEventListener('click', function(e) { e.preventDefault(); scrollFrame(e.target.className, frames)}, false);
 }
 
 
 function scrollFrame(tagClassName, frames) {
-
+	
 	//global variable이 아닌 객체로 변수값들을 관리한다.
 	var interval = new Object();
 	interval.direction = null;
@@ -67,9 +79,9 @@ function animationMove( interval, frames ) {
 
 
 //Cross Domain
-function loadAdUrlFromXHR() {
+function refreshBannerFromServer() {
 	var head = document.getElementsByTagName("body")[0];
-	
+		
 	var removeTarget = document.getElementById("xhr");
 	if (removeTarget != null)
 		head.removeChild(removeTarget);
@@ -81,13 +93,17 @@ function loadAdUrlFromXHR() {
 	head.appendChild(target);
 }
 
+
+//Cross Domain Callback function
 function YoonsungRequest( ad_url_from_server ) {
-	var target = document.querySelector(".article_ad > img");
-	
-		console.log(getStyle(target, "src"));
-	console.log(target);	
-	target.src = ad_url_from_server;
-	console.log(target);
+
+	console.log(ad_url_from_server);
+
+	var arr_banner = document.querySelectorAll(".article_ad > img");
+
+	for ( var index = 0 ; index < arr_banner.length; ++index ) {
+		arr_banner[index].src = ad_url_from_server; 		 
+	};
 }
 
 
@@ -96,31 +112,50 @@ function getStyle(node, style) {
 	return window.getComputedStyle(node, null).getPropertyValue(style);
 }
 
-function xhrProcess() {
+function xhrProcess( frame, int_press_num ) {
 
-	//test
-	loadAdUrlFromXHR();
-	//test end
+	var templateTag = document.getElementById("hidden_contents");
+	//var target = document.getElementById("article_frame_3");
+	
+	
+	var templateString = templateTag.innerHTML;
 
-	var test = document.getElementById("hidden_contents");
-	var target = document.getElementById("article_frame_3");
-	
-	
-	var templateString = test.innerHTML;
-	
-	console.log("test");
-	console.log(templateString);
 
-	var _logoURL = "http://static.naver.net/newsstand/up/2013/0813/nsd11390456.gif";
-	var _iframeURL = "http://newsstand.naver.com/include/page/056.html";
-	var _pressName = "테스트야";
+	var url = "./pressData.json";
+	var request = new XMLHttpRequest();
+
+	var _pressName;
+	var _logoURL;
+	var _iframeURL;
+	var press_total_num;
 	
+	request.open("GET", url, false);
 	
+	request.onreadystatechange=function() {
+			if ( request.readyState === 4 && request.status === 200 ) {
+			var result = request.responseText;
+			var responseObject = JSON.parse(result);
+			press_total_num = responseObject.length;
+			
+			
+			responseObject = responseObject[int_press_num];
+			console.log(responseObject);
+			_logoURL = responseObject.logoURL;
+			_iframeURL = responseObject.iframeURL;
+			_pressName = responseObject.press;	
+		}
+	}
+	
+	request.send(null);
+	
+
 	var compiled = _.template(templateString);	
 	var result = compiled( {logoURL:_logoURL, iframeURL:_iframeURL, pressName:_pressName} );
 	result = removeScriptTagFromString(result);		
 
-	target.innerHTML = result;
+	frame.innerHTML = result;
+	
+	return press_total_num;
 }
 
 function removeScriptTagFromString( value ) {
