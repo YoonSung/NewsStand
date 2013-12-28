@@ -40,6 +40,9 @@ function scrollFrame(tagClassName, frames) {
 		return;
 	}
 	
+	//사용자 액션에 대해 즉각적인 반응을 주기 위해서, 페이지숫자변경, 하단의 작은롤링 등을 클릭즉시 반영한다. 
+	changeExtraComponentBeforeRolling(interval);
+	
 	interval.id = null;
 	interval.count = 0;
 	interval.max = 50;
@@ -52,6 +55,50 @@ function scrollFrame(tagClassName, frames) {
 
 }
 
+function changeExtraComponentBeforeRolling(interval) {
+	//중앙 프레임 하단의 숫자변경 (옮기는 페이지로)
+	var number_frame = document.querySelector(".article_frame_pages > div");
+	var previousNum = parseInt(number_frame.querySelector("span:nth-of-type(1)").innerHTML);
+	var lastNum = parseInt(number_frame.querySelector("span:nth-of-type(3)").innerHTML);
+		
+	if ( interval.direction === -1 ) {
+		//만약 마지막페이지라면.
+		if ( previousNum === lastNum )
+			number_frame.querySelector("span:nth-of-type(1)").innerHTML = 1;
+		else
+			number_frame.querySelector("span:nth-of-type(1)").innerHTML = previousNum+1;			
+	} else {
+		//만약 1번페이지라면.
+		if ( previousNum === 1 )
+			number_frame.querySelector("span:nth-of-type(1)").innerHTML = lastNum;		
+		else
+			number_frame.querySelector("span:nth-of-type(1)").innerHTML = previousNum-1;			
+	}
+	
+}
+
+function changeExtraComponentAfterRolling( style_left, interval, frames ) {
+	var targetFrame;
+	var moveFrame;
+	
+	if ( interval.direction === -1 ) {
+
+		targetFrame = frames.children[4]
+		moveFrame = frames.children[0]
+	} else {
+		targetFrame = frames.children[0]
+		moveFrame = frames.children[4]
+	}
+
+	//가장 끝쪽에 있는 li엘리먼트를 반대편 끝으로 이동시킨뒤
+	frames.insertBefore(moveFrame , targetFrame);	
+		
+	//순식간에 ul태그 전체를 li엘리먼트가 이동한 반대편쪽으로 500만큼 이동시킨다. (그럼 view상에서는 변화없이 ul태그의 위치와 순서를 바꿀 수 있다)
+	frames.style.left = style_left + (interval.direction * -1000)+"px";
+}
+
+
+
 //interval object와 ul의 li리스트 전달
 function animationMove( interval, frames ) {
 	var style_left = parseInt(getStyle(frames, 'left'));	
@@ -60,23 +107,17 @@ function animationMove( interval, frames ) {
 		++interval.count;
 	
 	// 10씩 50회(max회) 이동했을 경우 (한번 move할때마다 count가 1씩 증가한다.)	
+	// 애니메이션이 종료된 이후의 처리를 여기서 하도록 한다.
+	// animationMoveEnd( interval, frames);로 메서드를 나누어서 진행할 시, 적용이 되지 않는 문제점. call by value인건가..?
 	if ( interval.max < interval.count ) {
 		clearInterval(interval.id);
 		interval.count = 0;		
 		
-		if ( interval.direction === -1 )
-			//가장 끝쪽에 있는 li엘리먼트를 반대편 끝으로 이동시킨뒤
-			frames.insertBefore(frames.children[0] , frames.children[5]);
-		else
-			frames.insertBefore(frames.children[3] , frames.children[0]);
-		
-			
-		//순식간에 ul태그 전체를 li엘리먼트가 이동한 반대편쪽으로 500만큼 이동시킨다. (그럼 view상에서는 변화없이 ul태그의 위치와 순서를 바꿀 수 있다)
-		frames.style.left = style_left + (interval.direction * -1000)+"px";
+
+		changeExtraComponentAfterRolling( style_left, interval, frames );
 
 	}
 }
-
 
 //Cross Domain
 function refreshBannerFromServer() {
