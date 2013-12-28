@@ -2,14 +2,18 @@
 function init() {
 	registerEvents();	
 	
-	
 	//5개의 frame영역에 데이터를 로드한다.
 	var target = document.getElementById("article_frame_3");
+	
 	var press_total_num = xhrProcess(target, 1);
 	xhrProcess(target.nextElementSibling, 2);
 	xhrProcess(target.nextElementSibling.nextElementSibling, 3);
 	xhrProcess(target.previousElementSibling, press_total_num);
 	xhrProcess(target.previousElementSibling.previousElementSibling, press_total_num-1);
+	
+	//중앙 frame영역에 투명도를 없앤다.
+	target.style.opacity = 1;
+	
 	
 	//총 json파일에서 읽은 등록된 press갯수를 중앙프레임 하단에 표기한다.
 	var number_frame = document.querySelector(".article_frame_pages > div");
@@ -21,9 +25,14 @@ function init() {
 
 function registerEvents() {
 	var frames = document.querySelector(".article_fix_size .wrapper");
-	document.querySelector(".article_fix_size").addEventListener('click', function(e) { e.preventDefault(); scrollFrame(e.target.className, frames)}, false);
-}
 
+	var rollingBtn = [document.querySelector(".article_fix_size"), document.querySelector(".article_frame_pages > div")];
+	
+	rollingBtn.forEach(function(item){
+		//에러. article_frame_pages항목 클릭시 이벤트가 연속되어 2번호출되는 문제점.
+		item.addEventListener('click', function(e) { e.preventDefault(); scrollFrame(e.target.className, frames)}, false);	
+	});	
+}
 
 function scrollFrame(tagClassName, frames) {
 	
@@ -31,17 +40,17 @@ function scrollFrame(tagClassName, frames) {
 	var interval = new Object();
 	interval.direction = null;
 	
-	if ( tagClassName === "rolling_left_btn" ) {
+	if ( tagClassName === "rolling_left_btn" || tagClassName === "rolling_left_btn_small" ) {
 		//방향에 따라서 direction 상수값을 바꿔준다
 		interval.direction = -1;
-	} else if ( tagClassName === "rolling_right_btn" ) {
+	} else if ( tagClassName === "rolling_right_btn" || tagClassName === "rolling_right_btn_small") {
 		interval.direction = 1;
 	} else {
 		return;
 	}
 	
 	//사용자 액션에 대해 즉각적인 반응을 주기 위해서, 페이지숫자변경, 하단의 작은롤링 등을 클릭즉시 반영한다. 
-	changeExtraComponentBeforeRolling(interval);
+	changeExtraComponentBeforeRolling(interval, frames);
 	
 	interval.id = null;
 	interval.count = 0;
@@ -85,7 +94,14 @@ function getLastPageNum() {
 	return ( parseInt(number_frame.querySelector("span:nth-of-type(3)").innerHTML) );
 }
 
-function changeExtraComponentBeforeRolling(interval) {
+function changeExtraComponentBeforeRolling(interval, frames) {
+	
+	//프레임들의 투명도 조정
+	frames.children[1].style.opacity = 1;
+	frames.children[2].style.opacity = 1;
+	frames.children[3].style.opacity = 1;
+
+
 	//중앙 프레임 하단의 숫자변경 (옮기는 페이지로)
 	var number_frame = document.querySelector(".article_frame_pages > div");
 	var previousNum =  getCurrentPageNum();
@@ -108,6 +124,7 @@ function changeExtraComponentBeforeRolling(interval) {
 }
 
 function changeExtraComponentAfterRolling( style_left, interval, frames ) {
+
 	var targetFrame;
 	var moveFrame;
 	
@@ -130,10 +147,10 @@ function changeExtraComponentAfterRolling( style_left, interval, frames ) {
 	//옮겨진 엘리먼트의 데이터를 새로 업데이트 시킨다.
 	var next_page = getNextPageNum(interval.direction, getNextPageNum(interval.direction, getCurrentPageNum()));
 	
-	console.log("next page ");
-	console.log(next_page);
-	console.log("direction");
-	console.log(interval.direction);
+	//프레임들의 투명도 조정
+	frames.children[1].style.opacity = 0.6;
+	frames.children[2].style.opacity = 1;
+	frames.children[3].style.opacity = 0.6;
 	
 	
 	xhrProcess( moveFrame,  next_page );
@@ -144,7 +161,6 @@ function changeExtraComponentAfterRolling( style_left, interval, frames ) {
 //interval object와 ul의 li리스트 전달
 function animationMove( interval, frames ) {
 	var style_left = parseInt(getStyle(frames, 'left'));	
-	console.log( interval.direction * style_left );	//for test
 	frames.style.left = style_left + (interval.direction * 20) +"px";	
 		++interval.count;
 	
@@ -179,8 +195,6 @@ function refreshBannerFromServer() {
 
 //Cross Domain Callback function
 function YoonsungRequest( ad_url_from_server ) {
-
-	console.log(ad_url_from_server);
 
 	var arr_banner = document.querySelectorAll(".article_ad > img");
 
@@ -223,7 +237,6 @@ function xhrProcess( frame, int_page_num ) {
 			
 			
 			responseObject = responseObject[int_page_num-1];
-			console.log(responseObject);
 			_logoURL = responseObject.logoURL;
 			_iframeURL = responseObject.iframeURL;
 			_pressName = responseObject.press;	
