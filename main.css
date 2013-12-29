@@ -546,7 +546,7 @@ header > .wrapper{
 	overflow:hidden;
 	line-height:999px;
 	display: inline-block;
-	margin-right:-5px;
+	#margin-right:-5px;
 	float:left;
 	
 }
@@ -563,7 +563,7 @@ header > .wrapper{
 	overflow:hidden;
 	line-height:999px;
 	display: inline-block;
-	float:left;	
+	float:left;
 }
 
 .rolling_right_btn_small:hover {

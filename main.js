@@ -33,15 +33,22 @@ function registerEvents() {
 	var rollingBtn = [document.querySelector(".article_fix_size"), document.querySelector(".article_frame_pages > div")];
 	
 	rollingBtn.forEach(function(item){
-		//에러. article_frame_pages항목 클릭시 이벤트가 연속되어 2번호출되는 문제점.
-		item.addEventListener('click', function(e) { e.preventDefault(); scrollFrame(e.target.className, frames)}, false);	
+		var interval = new Object();
+		interval.isAnimated = false;
+		item.addEventListener('click', function(e) { 
+			e.preventDefault();
+			
+			//만약 클릭후 애니메이션일 경우, 이벤트가 다시 발생되지 않도록 한다. (연속으로 두번눌리는 형태를 방지)
+			if ( interval.isAnimated === true )
+				return;
+			scrollFrame(e.target.className, frames, interval)
+		}, false);	
 	});	
 }
 
-function scrollFrame(tagClassName, frames) {
-	
+function scrollFrame(tagClassName, frames, interval) {
+		
 	//global variable이 아닌 객체로 변수값들을 관리한다.
-	var interval = new Object();
 	interval.direction = null;
 	
 	if ( tagClassName === "rolling_left_btn" || tagClassName === "rolling_left_btn_small" ) {
@@ -122,6 +129,8 @@ function getLastPageNum() {
 
 function changeExtraComponentBeforeRolling(interval, frames) {
 	
+	interval.isAnimated = true;
+	
 	//프레임들의 투명도 조정
 	frames.children[1].style.opacity = 1;
 	frames.children[2].style.opacity = 1;
@@ -193,6 +202,8 @@ function changeExtraComponentAfterRolling( style_left, interval, frames ) {
 	frames.children[3].style.opacity = 0.6;
 	
 	refreshBannerFromServer();
+	
+	interval.isAnimated = false;
 }
 
 
