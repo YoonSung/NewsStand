@@ -617,6 +617,11 @@ header > .wrapper{
 	background: url(http://static.naver.net/newsstand/img/20131014/sp_nwstd.png) -173px -489px no-repeat;
 }
 
+
+#contents_press_navi > ol .selected a {
+	background: url(http://static.naver.net/newsstand/img/20131014/sp_nwstd.png) -345px -489px no-repeat;
+}
+
 #contents_press_navi > .press_rolling_right {
 	position:absolute;
 	background: url(http://static.naver.net/newsstand/img/20131014/sp_nwstd.png) -273px -236px no-repeat;

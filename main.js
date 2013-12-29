@@ -11,19 +11,19 @@ function init() {
 	xhrProcess(target.previousElementSibling, press_total_num);
 	xhrProcess(target.previousElementSibling.previousElementSibling, press_total_num-1);
 	
-	//하단부 Navigation Rolling영역 초기화
-	xhrProcessForNavigationItem();
-	
 	
 	//중앙 frame영역에 투명도를 없앤다.
 	target.style.opacity = 1;
-	
 	
 	//총 json파일에서 읽은 등록된 press갯수를 중앙프레임 하단에 표기한다.
 	var number_frame = document.querySelector(".article_frame_pages > div");
 	number_frame.querySelector("span:nth-of-type(1)").innerHTML = 1;
 	number_frame.querySelector("span:nth-of-type(3)").innerHTML = press_total_num;
 	
+	//하단부 Navigation Rolling영역 초기화
+	xhrProcessForNavigationItem();
+	
+	//프레임 오른쪽 상단의 배너이미지 리로드.
 	refreshBannerFromServer();
 }
 
@@ -81,6 +81,8 @@ function getNextPageNum( direction, current_page ) {
 	if ( direction === 1 ) {
 		if ( current_page === 1 )
 			next_page = last_page;
+		else if ( current_page === last_page )
+			next_page = 1;
 		else
 			next_page = current_page-1;
 	} else {
@@ -91,6 +93,26 @@ function getNextPageNum( direction, current_page ) {
 	}
 	
 	return next_page;
+}
+
+function getPrevPageNum( direction, current_page ) {
+	var current_page = current_page;
+	var last_page = getLastPageNum();
+	var prev_page;
+	
+	if ( direction === -1 ) {
+		if ( current_page === 1 )
+			prev_page = last_page;
+		else
+			prev_page = current_page-1;
+	} else {
+		if ( current_page === last_page )
+			prev_page = 1;
+		else
+			prev_page = current_page+1;
+	}
+	
+	return prev_page;
 }
 
 function getLastPageNum() {
@@ -104,7 +126,6 @@ function changeExtraComponentBeforeRolling(interval, frames) {
 	frames.children[1].style.opacity = 1;
 	frames.children[2].style.opacity = 1;
 	frames.children[3].style.opacity = 1;
-
 
 	//중앙 프레임 하단의 숫자변경 (옮기는 페이지로)
 	var number_frame = document.querySelector(".article_frame_pages > div");
@@ -125,12 +146,21 @@ function changeExtraComponentBeforeRolling(interval, frames) {
 			number_frame.querySelector("span:nth-of-type(1)").innerHTML = previousNum-1;			
 	}
 	
+	console.log("prev page : ".concat(getPrevPageNum( interval.direction , getCurrentPageNum() )));
+	console.log("next page : ".concat(getNextPageNum( interval.direction , getCurrentPageNum() )));
+	
+	//하단 네비게이션 프레스바의 위치 및 포커스효과 변경.
+	var current_page_num = getCurrentPageNum();
+	updatePressNavigation( getPrevPageNum( interval.direction, current_page_num )-1 , getCurrentPageNum()-1 );
+
+	
 }
 
 function changeExtraComponentAfterRolling( style_left, interval, frames ) {
 
 	var targetFrame;
 	var moveFrame;
+	var current_page = getCurrentPageNum();
 	
 	if ( interval.direction === -1 ) {
 
@@ -149,15 +179,20 @@ function changeExtraComponentAfterRolling( style_left, interval, frames ) {
 	
 	
 	//옮겨진 엘리먼트의 데이터를 새로 업데이트 시킨다.
-	var next_page = getNextPageNum(interval.direction, getNextPageNum(interval.direction, getCurrentPageNum()));
+	console.log("current page : ".concat(current_page));
+	
+	//이미 페이지수는 변경되었으므로 -1값을 한 뒤, 다음페이지 구하는 함수를 두번 호출해서 바꿔야할 프레임을 정확하게 계산한다.
+	var next_page = getNextPageNum(interval.direction, getNextPageNum(interval.direction, current_page-1));
+	console.log(next_page);
+	
+	xhrProcess( moveFrame,  next_page );
 	
 	//프레임들의 투명도 조정
 	frames.children[1].style.opacity = 0.6;
 	frames.children[2].style.opacity = 1;
 	frames.children[3].style.opacity = 0.6;
 	
-	
-	xhrProcess( moveFrame,  next_page );
+	refreshBannerFromServer();
 }
 
 
@@ -195,7 +230,6 @@ function refreshBannerFromServer() {
 	
 	head.appendChild(target);
 }
-
 
 //Cross Domain Callback function
 function YoonsungRequest( ad_url_from_server ) {
@@ -259,22 +293,34 @@ function xhrProcess( frame, int_page_num ) {
 	return press_total_num;
 }
 
+function updatePressNavigation(prev_index, target_index) {
+	var containerFrame = document.querySelector("#contents_press_navi ol");
+
+	if ( prev_index != null ) {
+		var prev_frame = containerFrame.children[prev_index];		
+		prev_frame.className = null;
+	}
+
+	var target_frame = containerFrame.children[target_index];
+	target_frame.className = "selected";
+}
+
 function xhrProcessForNavigationItem() {
 
 	var containerFrame = document.querySelector("#contents_press_navi ol");
-	console.log(containerFrame);
-
-
 	var templateString = "<li id='<%=pressIndex%>'><a href='#'><img src='<%=paperImgURL%>'/></a></li>";
 	var url = "./pressData.json";
 	var request = new XMLHttpRequest();
-	
+
 	request.open("GET", url, false);
 	request.onreadystatechange=function() {
+	
+		//console.log("request.readyState : ".concat(request.readyState));
+		//console.log("request.status : ".concat(request.status));
+		
 		if ( request.readyState === 4 && request.status === 200 ) {
 			var result = request.responseText;
 			var responseArray = JSON.parse(result);
-			console.log(responseArray);
 			var index = 0;
 			var targetObject;
 			
@@ -307,9 +353,9 @@ function xhrProcessForNavigationItem() {
 			
 		}
 	}
-	
 	request.send(null);
-
+	
+	updatePressNavigation(null, 0);
 }
 
 
