@@ -24,7 +24,11 @@ function init() {
 	xhrProcessForNavigationItem();
 	
 	//프레임 오른쪽 상단의 배너이미지 리로드.
-	refreshBannerFromServer();
+	refreshBannerFromServer(1);
+	refreshBannerFromServer(2);
+	refreshBannerFromServer(3);
+	refreshBannerFromServer(4);
+	refreshBannerFromServer(5);
 }
 
 function registerEvents() {
@@ -88,13 +92,11 @@ function getNextPageNum( direction, current_page ) {
 	if ( direction === 1 ) {
 		if ( current_page === 1 )
 			next_page = last_page;
-		else if ( current_page === last_page )
-			next_page = 1;
 		else
 			next_page = current_page-1;
 	} else {
 		if ( current_page === last_page )
-			next_page = 1;
+			next_page = 1;			
 		else
 			next_page = current_page+1;
 	}
@@ -117,7 +119,7 @@ function getPrevPageNum( direction, current_page ) {
 			prev_page = 1;
 		else
 			prev_page = current_page+1;
-	}
+	}//삼항연산자로 바꿔보자.
 	
 	return prev_page;
 }
@@ -170,14 +172,16 @@ function changeExtraComponentAfterRolling( style_left, interval, frames ) {
 	var targetFrame;
 	var moveFrame;
 	var current_page = getCurrentPageNum();
+	var refresh_banner_target_num; 
 	
 	if ( interval.direction === -1 ) {
-
-		targetFrame = frames.children[4]
-		moveFrame = frames.children[0]
+		targetFrame = frames.children[4].nextSibling;
+		moveFrame = frames.children[0];
+		refresh_banner_target_num = 5;
 	} else {
-		targetFrame = frames.children[0]
-		moveFrame = frames.children[4]
+		targetFrame = frames.children[0];
+		moveFrame = frames.children[4];
+		refresh_banner_target_num = 1;
 	}
 
 	//가장 끝쪽에 있는 li엘리먼트를 반대편 끝으로 이동시킨뒤
@@ -186,12 +190,11 @@ function changeExtraComponentAfterRolling( style_left, interval, frames ) {
 	//순식간에 ul태그 전체를 li엘리먼트가 이동한 반대편쪽으로 500만큼 이동시킨다. (그럼 view상에서는 변화없이 ul태그의 위치와 순서를 바꿀 수 있다)
 	frames.style.left = style_left + (interval.direction * -1000)+"px";
 	
-	
 	//옮겨진 엘리먼트의 데이터를 새로 업데이트 시킨다.
 	console.log("current page : ".concat(current_page));
 	
 	//이미 페이지수는 변경되었으므로 -1값을 한 뒤, 다음페이지 구하는 함수를 두번 호출해서 바꿔야할 프레임을 정확하게 계산한다.
-	var next_page = getNextPageNum(interval.direction, getNextPageNum(interval.direction, current_page-1));
+	var next_page = getNextPageNum(interval.direction, getNextPageNum(interval.direction, current_page));
 	console.log(next_page);
 	
 	xhrProcess( moveFrame,  next_page );
@@ -201,11 +204,10 @@ function changeExtraComponentAfterRolling( style_left, interval, frames ) {
 	frames.children[2].style.opacity = 1;
 	frames.children[3].style.opacity = 0.6;
 	
-	refreshBannerFromServer();
+	refreshBannerFromServer(refresh_banner_target_num);
 	
 	interval.isAnimated = false;
 }
-
 
 
 //interval object와 ul의 li리스트 전달
@@ -219,7 +221,7 @@ function animationMove( interval, frames ) {
 	// animationMoveEnd( interval, frames);로 메서드를 나누어서 진행할 시, 적용이 되지 않는 문제점. call by value인건가..?
 	if ( interval.max < interval.count ) {
 		clearInterval(interval.id);
-		interval.count = 0;		
+		interval.count = 0;	//o_interval처럼 앞에 prefix값을 담자.	
 		
 
 		changeExtraComponentAfterRolling( style_left, interval, frames );
@@ -228,7 +230,7 @@ function animationMove( interval, frames ) {
 }
 
 //Cross Domain
-function refreshBannerFromServer() {
+function refreshBannerFromServer(frameNumber) {
 	var head = document.getElementsByTagName("body")[0];
 		
 	var removeTarget = document.getElementById("xhr");
@@ -237,19 +239,16 @@ function refreshBannerFromServer() {
 	
 	var target = document.createElement("script");
 	target.id = "xhr";
-	target.src = "http://localhost:3080/board/xhr/YoonsungRequest";
+	target.src = "http://localhost:3080/board/xhr/YoonsungRequest/"+frameNumber;
 	
 	head.appendChild(target);
 }
 
 //Cross Domain Callback function
-function YoonsungRequest( ad_url_from_server ) {
+function YoonsungRequest( ad_url_from_server, frameNumber ) {
 
 	var arr_banner = document.querySelectorAll(".article_ad > img");
-
-	for ( var index = 0 ; index < arr_banner.length; ++index ) {
-		arr_banner[index].src = ad_url_from_server; 		 
-	};
+	arr_banner[frameNumber-1].src = ad_url_from_server; 		 
 }
 
 
@@ -303,7 +302,7 @@ function xhrProcess( frame, int_page_num ) {
 	
 	return press_total_num;
 }
-
+//utilites 마지막시간에 했던 것처럼. 다 전역공간에 있으니까
 function updatePressNavigation(prev_index, target_index) {
 	var containerFrame = document.querySelector("#contents_press_navi ol");
 
@@ -370,6 +369,8 @@ function xhrProcessForNavigationItem() {
 }
 
 
+//쓸데없이 만든 함수...SCRIPT에 아이디를 줬으면 그냥 써도 되는건데 파싱하는거 안말들고..
+//이래서 밤늦게 코딩하지 말라는거구나 ㅇㅇ..
 function removeScriptTagFromString( value ) {
 	
 	while ( value.indexOf("<script") != -1 && value.indexOf("</script")) {
